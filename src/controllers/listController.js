@@ -24,4 +24,15 @@ router.post('/register', async (req, res) => {
     }
 });
 
+router.delete('/remove/:id', async(req, res) => {
+    const _id = req.params.id;
+    try {
+        await List.remove({ _id });
+        return res.send({ message: 'List remove success.' })
+    } catch (err) {
+        console.log('err:', err);
+        res.status(400).send({ error: 'List remove failed' });
+    }
+});
+
 module.exports = app => app.use('/list', router);
